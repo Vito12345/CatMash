@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CatMash.Domain.Cat>
+@{
+    ViewData["Title"] = "Tous les scores";
+    var json = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+}
+
+<h1>Tous les votes</h1>
+<div class="page" id="scores">
+    <section class="choice">
+        <article v-for="cat in cats">
+            <div class="image-wrapper">
+                <img v-bind:src="cat.Url" v-bind:alt="cat.Id" />
+            </div>
+            <footer>{{cat.Votes}} vote(s) <i class="fas fa-cat"></i></footer>
+        </article>
+    </section>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#scores',
+            data: { cats: @json }
+        });
+    </script>
+}
