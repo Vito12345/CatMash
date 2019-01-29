@@ -19,6 +19,7 @@ namespace CatMash.Test.Business
         public void TestInit()
         {
             _mockCatRepo = new Mock<ICatsRepository>();
+            _mockCatRepo.Setup(x => x.GetAllCatsAsync()).Returns(Task.FromResult<IEnumerable<Cat>>(new List<Cat>()));
             _sut = new CatManager(_mockCatRepo.Object);
         }
 
